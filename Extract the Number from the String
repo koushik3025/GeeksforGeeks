@@ -1,0 +1,15 @@
+def largest_number_without_nine(sentence):
+    tokens = sentence.split()
+    max_number = -1
+    
+    for token in tokens:
+        if token.isdigit():
+            num = int(token)
+            if '9' not in token:
+                if num > max_number:
+                    max_number = num
+    return max_number
+sentence1 = input()
+sentence2 = input()
+print(largest_number_without_nine(sentence1))
+print(largest_number_without_nine(sentence2))  
