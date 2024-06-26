@@ -1,0 +1,30 @@
+
+class Solution:
+	def findCoverage(self, matrix):
+		rows = len(matrix)
+        cols = len(matrix[0])
+        total_coverage = 0
+        
+        def count_ones_in_direction(r, c, dr, dc):
+            count = 0
+            while 0 <= r < rows and 0 <= c < cols:
+                if matrix[r][c] == 1:
+                    count += 1
+                    break  
+                elif matrix[r][c] == 0:
+                    break  
+                r += dr
+                c += dc
+            return count
+        
+        for r in range(rows):
+            for c in range(cols):
+                if matrix[r][c] == 0:
+                    coverage = 0
+                    coverage += count_ones_in_direction(r, c - 1, 0, -1)
+                    coverage += count_ones_in_direction(r, c + 1, 0, 1)
+                    coverage += count_ones_in_direction(r - 1, c, -1, 0)
+                    coverage += count_ones_in_direction(r + 1, c, 1, 0)
+                    total_coverage += coverage
+        
+        return total_coverage
